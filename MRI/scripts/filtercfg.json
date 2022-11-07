@@ -1,0 +1,12 @@
+{
+  "t1w": {
+    "acquisition": "prescannormalized",
+    "reconstruction": "pydeface",
+    "suffix": "T1w"
+  },
+  "t2w": {
+    "acquisition": "prescannormalized",
+    "reconstruction": "pydeface",
+    "suffix": "T2w"
+  }
+}
