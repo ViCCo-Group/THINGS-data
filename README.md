@@ -6,6 +6,7 @@
 >
 > The THINGS-data manuscript is currently under review. All of the data will be made publicly available upon acceptance of the manuscript and the relevant links will be included in this readme. If you are interested in early access, get in touch (hebart [at] cbs.mpg.de)! Currently, early access is restricted to the figshare collection.
 
+
 # Download
 
 ## Download from figshare
@@ -25,6 +26,11 @@ The raw fMRI and MEG datasets are available on [OpenNeuro](https://openneuro.org
 ## Download from OSF
 
 The behavioral dataset containing 4.7 million human similarity judgements is available on OSF and can be downloaded directly via your web browser.
+
+
+# Repository contents
+
+The analysis code in this repository is structured into three sub-folders for the three data modalities: [MRI](MRI), [MEG](MEG), and [behavior](behavior).
 
 # How to cite
 ```
