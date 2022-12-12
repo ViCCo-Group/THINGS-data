@@ -1,3 +1,14 @@
+"""
+Run multidimensional scaling on single trial responses in category-selective brain areas. 
+
+Usage:
+python mds_betas.py <subject_ID> <bids_path> <category_1> <category_2> <color_1> <color_2>
+
+Examples:
+python mds_betas.py 01 /home/user/thingsmri vehicle tool lightskyblue mediumvioletred
+python mds_betas.py 01 /home/user/thingsmri animal food rebeccapurple mediumspringgreen
+"""
+
 import glob
 from os.path import join as pjoin
 import numpy as np
@@ -10,7 +21,7 @@ from tqdm import tqdm
 from sklearn.manifold import MDS
 
 sys.path.append(os.getcwd())
-from utils import load_category_df
+from utils import load_category_df, get_category_rois
 from betas import load_betas, load_filenames, filter_catch_trials, average_betas_per_concept
 
 sys.path.append(pjoin(os.pardir, os.pardir, 'external_libraries'))
@@ -102,3 +113,15 @@ def run_mds_on_betas(
     fig.savefig(out_png, dpi=300)
     fig.savefig(out_pdf, dpi=300)
     return None
+
+if __name__ == "__main__":
+    sub, bidsroot, cat1, cat2, col1, col2 = sys.argv[1:]
+    rois = get_category_rois(sub, bidsroot, '/rois/category_localizer')
+    for roiname, roifile in rois:
+        if "RSC" in roiname:
+            del rois[roiname]
+    mask = intersect_masks(rois.values(), threshold=0, connected=False)
+    run_mds_on_betas(
+        sub, bidsroot, mask=mask,
+        target_cats=[cat1, cat2], target_colors=[col1, col2]
+    )
