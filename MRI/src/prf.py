@@ -3,7 +3,10 @@ Code for estimating retinotopic parameters with AFNIs circular population
 receptive field mapping and neuropythy to further refine these estimates and
 delineate retinotopic regions.
 
-Nonpython requirements: FSL, AFNI
+Requires a preprocessed version of the dataset stored in bidsdata/derivatives/fmriprep. Further non-python dependencies: FSL, AFNI
+
+Usage:
+python prf.py <subject_ID> <bids_path> <afni_output_path>
 """
 
 import os
@@ -202,11 +205,6 @@ def run_neuropythy(
         reconall_dir,
         flip_y=True,
 ):
-    """
-    Example:
-        import sys
-        run_neuropythy(sub=sys.argv[1])
-    """
     wdir = pjoin(base_wdir, f'sub-{sub}')
     outdir = pjoin(base_outdir, f'sub-{sub}')
     for d in [wdir, outdir]:
@@ -303,3 +301,21 @@ def threshold_vareas_by_eccentricity(
             lres_img = resample_to_img(roi_img, ref_img, interpolation='linear')
             lres_img.to_filename(pjoin(thresh_outdir, f'resampled_va-{roival}_interp-linear.nii.gz'))
     return None
+
+
+if __name__ == "__main__":
+    import sys
+    sub, bidsroot, afni_inputs_dir = sys.argv[1], sys.argv[2], sys.argv[3]
+    
+    # run PRF estimation with AFNI
+    conv_fname = pjoin(afni_inputs_dir, 'conv.ref.spmg1_manual.1D')
+    stimulus_brik = pjoin(afni_inputs_dir, 'stim.308.LIA.bmask.resam+orig.BRIK')
+    stimulus_head = pjoin(afni_inputs_dir, 'stim.308.LIA.bmask.resam+orig.HEAD')
+    
+    afniprf = ThingsPrfAfni(
+        bidsroot, sub,
+        stimulus_brik,
+        stimulus_head,
+        conv_fname,
+    )
+    afniprf.run()

@@ -1,4 +1,6 @@
-#! /usr/env/python
+"""
+Run Freesurfer's recon-all on the THINGS-fMRI dataset. Mostly intended for documentation.
+"""
 
 import stat
 import sys
