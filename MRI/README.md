@@ -15,6 +15,8 @@ Code accompanying the fMRI analyses demonstrated in the [THINGS-data manuscript]
 - [localizerGLM_FSL.py](src/localizerGLM_FSL.py): Analysis code for the object category functional localizer, running [FSL](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki) and [nipype](https://nipy.org/packages/nipype/index.html).
 - [melodic.py](src/melodic.py): Analysis code for the ICA denoising procedure. This includes: a) running ICA ([FSL MELODIC](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/MELODIC)) on the preprocessed functional MRI data, b) calculating a list of features which characterize each IC, c) generating visualizations for raters to label, d) output ICA noise regressors based on feature thresholds. 
 - [betas.py](src/betas.py): Procedure for estimating single trial responses from the preprocessed volumetric time series data.
+- [anc.py](src/anc.py): Estimation of noise ceilings in single-trial response estimates.
+- [mds_betas.py](src/mds_betas.py): Script for visualizing similarity structure in LOC responses via multidimensional scaling (grouped by object categories). 
 - [utils.py](src/utils.py), [glm.py](src/glm.py), [dataset](src/dataset.py): Miscellaneous helper functions used by the other modules.
 
 ## scripts
