@@ -1,10 +1,11 @@
 """
 Implementation of the ICA denoising procedure.
-The function run_melodic_wf runs the additional preprocesisng and ICA.
-The class EvalMelodic is used to calculate each ICs features and generate
-visual reports for the raters.
-The function write_noise_tsvs then produces the final noise regressors based
-on the chosen thresholds.
+
+- run_melodic_wf runs the additional preprocesisng and ICA.
+- EvalMelodic is used to calculate each ICs features and generate visual reports for the raters.
+- write_noise_tsvs then produces the final noise regressors based on the chosen thresholds.
+
+This module is meant for documentation not intended for re-running since it relies on labels given by two human raters.
 """
 
 import os
