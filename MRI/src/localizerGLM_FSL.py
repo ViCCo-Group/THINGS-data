@@ -1,6 +1,12 @@
 """
-Code for localizing category selective regions of interests.
-Uses FSL and nipype.
+Code for localizing category selective regions of interests. The nipype implementation can exploit running on multiple CPU,
+the number of which can be specified with <n_processors>
+
+Usage:
+python localizerGLM_FSL.py <subject_ID> <bids_path> <n_processors>
+
+Example:
+python betas.py 01 /home/user/thingsmri 8
 """
 
 import os
@@ -234,3 +240,9 @@ def make_localizerGLM_wf(
         ])
     ])
     return wf
+
+if __name__ == '__main__':
+    import sys
+    subject, bidsroot, nprocs = sys.argv[1], sys.argv[2], sys.argv[3]
+    wf = make_localizerGLM_wf(subject, bidsroot)
+    wf.run(plugin='MultiProc', plugin_args=dict(n_procs=nprocs))

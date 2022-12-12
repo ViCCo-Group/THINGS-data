@@ -1,3 +1,14 @@
+"""
+Estimate single-trial responses. Output will be saved in the "derivatives" subfolder of the bids dataset.
+NOTE: This analysis is resource-intensive in terms of computer memory and cpu usage. It should really only be run on a computing cluster and not on home computers or laptops.
+
+Usage:
+python betas.py <subject_ID> <bids_path>
+
+Example:
+python betas.py 01 /home/user/thingsmri
+"""
+
 import glob
 import os
 import random
@@ -11,7 +22,7 @@ import pandas as pd
 from fracridge import FracRidgeRegressor
 from joblib import Parallel, delayed
 from nilearn.glm.first_level import make_first_level_design_matrix
-from nilearn.image import math_img, load_img
+from nilearn.image import load_img
 from nilearn.masking import unmask, apply_mask
 from numpy.random import normal
 from scipy.linalg import block_diag
@@ -21,11 +32,8 @@ from sklearn.metrics import r2_score
 from sklearn.model_selection import KFold
 from tqdm import tqdm
 
-# sys.path.append(os.getcwd())
-from glm import THINGSGLM, df_to_boxcar_design
-from glm import get_nuisance_df
-from utils import pearsonr_nd, get_hrflib, spearman_brown, match_scale, apply_mask_smoothed
-from utils import regress_out, r2_ndarr
+from .glm import THINGSGLM, df_to_boxcar_design, get_nuisance_df
+from .utils import pearsonr_nd, get_hrflib, spearman_brown, match_scale, apply_mask_smoothed, regress_out, r2_ndarr
 
 
 class SingleTrialBetas(THINGSGLM):
@@ -37,7 +45,7 @@ class SingleTrialBetas(THINGSGLM):
             self,
             bidsroot: str,
             subject: str,
-            out_deriv_name: str = 'betas',
+            out_deriv_name: str = 'betas_vol',
             usecache: bool = True,
             tuning_procedure: str = 'stepwise',
             standardize_noiseregs: bool = True,
@@ -451,9 +459,6 @@ class SingleTrialBetas(THINGSGLM):
                 pd.DataFrame(condnames_runs[flat_i]).to_csv(conds_tsv, sep='\t', header=['image_filename'])
 
     def run(self):
-        """
-        """
-
         print('\nLoading design and noise regressors\n')
         event_files, bold_files, nuisance_tsvs, masks = self.get_inputs()
         self.add_union_mask(masks)
@@ -862,3 +867,16 @@ def posthoc_scaling(
     for src, trgt in tqdm(zip(orig_tsvs, matched_tsvs), 'copying tsv files'):
         copyfile(src, trgt)
     return
+
+if __name__ == '__main__':
+    import sys
+    sub, bidsroot = sys.argv[1], sys.argv[2]
+    # get an unregularized estimate of responses
+    stb_unreg = SingleTrialBetas(bidsroot, sub, cv_scheme='unregularized', out_deriv_name='betas_unregularized')
+    stb_unreg.run()
+    # use cross-validation and l2 regularization
+    stb_reg = SingleTrialBetas(bidsroot, sub, out_deriv_name='betas_regularized')
+    stb_reg.run()
+    # apply post-hoc scaling
+    posthoc_scaling(sub=sub, bidsroot=bidsroot, reg_derivname='betas_regularized', unreg_derivname='betas_unregularized', out_derivname='betas_vol')
+    
