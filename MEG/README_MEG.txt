@@ -31,6 +31,8 @@ Descriptions of eyetracking codes (can be found in the eyetracking subfolder)
 3)	step2_eyetracking_plot.py:                              load epoched eyetracking data and make the plots shown in the supplementary materials. [call from command line with inputs -bids_dir]
 
 
+
+
 If you find any errors or if something does not work, please reach out to lina.teichmann@nih.gov
 
 
