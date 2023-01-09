@@ -17,7 +17,7 @@ THINGS-data is hosted as a collection of data objects on figshare.
 
 > 🔗 Figshare Download
 > 
-> #TODO: figshare collection public link
+> [https://doi.org/10.25452/figshare.plus.c.6161151](https://doi.org/10.25452/figshare.plus.c.6161151)
 
 Besides the raw data, this collection includes a data derivatives such as preprocessed versions of both the fMRI and MEG data. Additional derivatives for the fMRI data include single trial response estimates, cortical surface maps, noise ceiling estimates, and regions of interest.
 
