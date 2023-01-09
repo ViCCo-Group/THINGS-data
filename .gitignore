@@ -1,2 +1,4 @@
 *scenePRF_Fix.py
 *.vscode/
+.*
+!/.gitignore
