@@ -3,7 +3,7 @@ README MEG
 We collected MEG data along with eyetracking data from four participants in twelve sessions. The BIDS-formatted data can be downloaded from OpenNeuro. 
 This repository contains all codes for the MEG analysis and the eyetracking analyses. 
 Running the scripts in order creates all the outputs necessary to recreate the plots shown in the paper. 
-All codes are command-line executable (tested on Mac and Linux) and are written in Python (find full list of dependencies in environment.yml file) & MATLAB (tested on MATLAB R2022a). 
+All codes are command-line executable (tested on Mac and Linux) and are written in Python (find full list of dependencies in environment_THINGS-MEG.yml file) & MATLAB (tested on MATLAB R2022a). 
 In addition to standard toolboxes, the MATLAB toolbox CoSMoMVPA (https://www.cosmomvpa.org) and mne-matlab(https://github.com/mne-tools/mne-matlab) are required.
 
 Description of MEG codes:
