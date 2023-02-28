@@ -4,7 +4,7 @@
 
 # Repository contents
 
-This repository the scripts and notebooks for reproducing the neuroimaging analyses presented in the [THINGS-data paper](https://doi.org/10.1101/2022.07.22.501123). It is structured into two sub-folders reflecting the two neuroimaging data modalities: 
+This repository the scripts and notebooks for reproducing the neuroimaging analyses presented in the [THINGS-data paper](https://elifesciences.org/articles/82580). It is structured into two sub-folders reflecting the two neuroimaging data modalities: 
 - [MRI](MRI)
 - [MEG](MEG)
 
