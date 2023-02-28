@@ -1,6 +1,6 @@
 # THINGS-data
 
-[THINGS-data](https://doi.org/10.1101/2022.07.22.501123) is a collection of large-scale datasets for the study of natural object representations in brain and behavior. It includes functional magnetic resonance imaging (fMRI) data, magnetoencephalographic (MEG) recordings, and 4.70 million similarity judgments in response to thousands of images from the [THINGS object concept and image database](https://doi.org/10.1371/journal.pone.0223792).
+[THINGS-data](https://elifesciences.org/articles/82580) is a collection of large-scale datasets for the study of natural object representations in brain and behavior. It includes functional magnetic resonance imaging (fMRI) data, magnetoencephalographic (MEG) recordings, and 4.70 million similarity judgments in response to thousands of images from the [THINGS object concept and image database](https://doi.org/10.1371/journal.pone.0223792).
 
 # Repository contents
 
@@ -54,15 +54,16 @@ The behavioral dataset containing 4.7 million human similarity judgements is ava
 
 # How to cite
 ```
-@article {Hebart2022.07.22.501123,
-	author = {Hebart, M.N. and Contier, O. and Teichmann, L. and Rockter, A.H. and Zheng, C.Y. and Kidder, A. and Corriveau, A. and Vaziri-Pashkam, M. and Baker, C.I.},
-	title = {THINGS-data: A multimodal collection of large-scale datasets for investigating object representations in brain and behavior},
-	elocation-id = {2022.07.22.501123},
-	year = {2022},
-	doi = {10.1101/2022.07.22.501123},
-	publisher = {Cold Spring Harbor Laboratory},
-	URL = {https://www.biorxiv.org/content/early/2022/07/23/2022.07.22.501123},
-	eprint = {https://www.biorxiv.org/content/early/2022/07/23/2022.07.22.501123.full.pdf},
-	journal = {bioRxiv}
+@article{
+	Hebart2023,
+	doi = {10.7554/elife.82580},
+  	url = {https://doi.org/10.7554/elife.82580},
+	year = {2023},
+	month = feb,
+	publisher = {{eLife} Sciences Publications,  Ltd},
+	volume = {12},
+	author = {Martin N Hebart and Oliver Contier and Lina Teichmann and Adam H Rockter and Charles Y Zheng and Alexis Kidder and Anna Corriveau and Maryam Vaziri-Pashkam and Chris I Baker},
+	title = {{THINGS}-data,  a multimodal collection of large-scale datasets for investigating object representations in human brain and behavior},
+	journal = {{eLife}}
 }
 ```
