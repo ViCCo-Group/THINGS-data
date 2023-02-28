@@ -54,16 +54,22 @@ The behavioral dataset containing 4.7 million human similarity judgements is ava
 
 # How to cite
 ```
-@article{
-	Hebart2023,
-	doi = {10.7554/elife.82580},
-  	url = {https://doi.org/10.7554/elife.82580},
-	year = {2023},
-	month = feb,
-	publisher = {{eLife} Sciences Publications,  Ltd},
-	volume = {12},
-	author = {Martin N Hebart and Oliver Contier and Lina Teichmann and Adam H Rockter and Charles Y Zheng and Alexis Kidder and Anna Corriveau and Maryam Vaziri-Pashkam and Chris I Baker},
-	title = {{THINGS}-data,  a multimodal collection of large-scale datasets for investigating object representations in human brain and behavior},
-	journal = {{eLife}}
+@article {
+	THINGSdata,
+	article_type = {journal},
+	title = {THINGS-data, a multimodal collection of large-scale datasets for investigating object representations in human brain and behavior},
+	author = {Hebart, Martin N and Contier, Oliver and Teichmann, Lina and Rockter, Adam H and Zheng, Charles Y and Kidder, Alexis and Corriveau, Anna and Vaziri-Pashkam, Maryam and Baker, Chris I},
+	editor = {Barense, Morgan},
+	volume = 12,
+	year = 2023,
+	month = {feb},
+	pub_date = {2023-02-27},
+	pages = {e82580},
+	citation = {eLife 2023;12:e82580},
+	doi = {10.7554/eLife.82580},
+	url = {https://doi.org/10.7554/eLife.82580},
+	journal = {eLife},
+	issn = {2050-084X},
+	publisher = {eLife Sciences Publications, Ltd},
 }
 ```
