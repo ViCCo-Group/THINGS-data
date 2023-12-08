@@ -1,4 +1,6 @@
 *scenePRF_Fix.py
+__pycache__
+*.egg-info
 *.vscode/
 .*
 !/.gitignore

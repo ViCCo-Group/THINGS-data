@@ -9,7 +9,6 @@ python mds_betas.py 01 /home/user/thingsmri vehicle tool lightskyblue mediumviol
 python mds_betas.py 01 /home/user/thingsmri animal food rebeccapurple mediumspringgreen
 """
 
-import glob
 from os.path import join as pjoin
 import numpy as np
 import os
@@ -17,26 +16,34 @@ from nilearn.masking import intersect_masks
 import seaborn as sns
 import matplotlib.pyplot as plt
 import sys
-from tqdm import tqdm
 from sklearn.manifold import MDS
 
 sys.path.append(os.getcwd())
-from utils import load_category_df, get_category_rois
-from betas import load_betas, load_filenames, filter_catch_trials, average_betas_per_concept
-
-sys.path.append(pjoin(os.pardir, os.pardir, 'external_libraries'))
+from thingsmri.utils import load_category_df, get_category_rois
+from thingsmri.betas import (
+    load_betas,
+    load_filenames,
+    filter_catch_trials,
+    average_betas_per_concept,
+)
 
 
 def run_mds_on_betas(
-        sub,
-        bidsroot,
-        mask,
-        betas_derivname='betas_loo/on_residuals/scalematched',
-        out_derivname='mds',
-        target_cats=['body part', 'plant'],
-        target_colors=['rebeccapurple', 'mediumspringgreen'],
-        mds_kws=dict(n_components=2, n_init=10, max_iter=5_000, n_jobs=-1, dissimilarity='precomputed'),
-        seed=0,
+    sub,
+    bidsroot,
+    mask,
+    betas_derivname="betas_loo/on_residuals/scalematched",
+    out_derivname="mds",
+    target_cats=["body part", "plant"],
+    target_colors=["rebeccapurple", "mediumspringgreen"],
+    mds_kws=dict(
+        n_components=2,
+        n_init=10,
+        max_iter=5_000,
+        n_jobs=-1,
+        dissimilarity="precomputed",
+    ),
+    seed=0,
 ):
     """
     Example:
@@ -63,12 +70,15 @@ def run_mds_on_betas(
     # if colors are passed as RBG tuples, normalize to 0-1
     for i, color in enumerate(target_colors):
         if type(color) == tuple:
-            target_colors[i] = tuple([e/255 for e in color])
+            target_colors[i] = tuple([e / 255 for e in color])
     # define file names
-    outdir = pjoin(bidsroot, 'derivatives', out_derivname, f'sub-{sub}')
-    out_npy = pjoin(outdir, f'{target_cats[0]}_{target_cats[1]}_ninit-{mds_kws["n_init"]}_maxiter-{mds_kws["max_iter"]}.npy')
-    out_png = out_npy.replace('.npy', '.png')
-    out_pdf = out_npy.replace('.npy', '.pdf')
+    outdir = pjoin(bidsroot, "derivatives", out_derivname, f"sub-{sub}")
+    out_npy = pjoin(
+        outdir,
+        f'{target_cats[0]}_{target_cats[1]}_ninit-{mds_kws["n_init"]}_maxiter-{mds_kws["max_iter"]}.npy',
+    )
+    out_png = out_npy.replace(".npy", ".png")
+    out_pdf = out_npy.replace(".npy", ".pdf")
     if not os.path.exists(outdir):
         os.makedirs(outdir)
     # load betas
@@ -84,11 +94,16 @@ def run_mds_on_betas(
     cat_df = load_category_df()
     cats = []
     for con in concepts:
-        if con[-1] in ['1', '2']:  # some concepts are coded 'bracelet2' or 'bow1', we just count them as individuals
+        if con[-1] in [
+            "1",
+            "2",
+        ]:  # some concepts are coded 'bracelet2' or 'bow1', we just count them as individuals
             con = con[:-1]
-        row = cat_df.loc[cat_df['Word'] == con.replace('_', ' ')]
+        row = cat_df.loc[cat_df["Word"] == con.replace("_", " ")]
         hits = [cat for cat in target_cats if row[cat].values[0] == 1]
-        result = hits[0] if len(hits) else 'Other'  # only keep the first category found, or "Other"
+        result = (
+            hits[0] if len(hits) else "Other"
+        )  # only keep the first category found, or "Other"
         cats.append(result)
     cats = np.array(cats)
     sort = np.argsort(cats)
@@ -102,26 +117,33 @@ def run_mds_on_betas(
     Y = mds.embedding_[sort]
     np.save(out_npy, Y)
     # plot and save
-    colors_ = target_colors + ['lightgrey']
-    labels_ = target_cats + ['Other']
+    colors_ = target_colors + ["lightgrey"]
+    labels_ = target_cats + ["Other"]
     fig = plt.figure(figsize=(7, 7))
     g = sns.scatterplot(
-        x=Y[:, 0], y=Y[:, 1], hue=cats, hue_order=labels_, palette=colors_,
-        s=300, alpha=.7, linewidth=0, legend=False
+        x=Y[:, 0],
+        y=Y[:, 1],
+        hue=cats,
+        hue_order=labels_,
+        palette=colors_,
+        s=300,
+        alpha=0.7,
+        linewidth=0,
+        legend=False,
     )
-    plt.axis('off')
+    plt.axis("off")
     fig.savefig(out_png, dpi=300)
     fig.savefig(out_pdf, dpi=300)
     return None
 
+
 if __name__ == "__main__":
     sub, bidsroot, cat1, cat2, col1, col2 = sys.argv[1:]
-    rois = get_category_rois(sub, bidsroot, '/rois/category_localizer')
+    rois = get_category_rois(sub, bidsroot, "/rois/category_localizer")
     for roiname, roifile in rois:
         if "RSC" in roiname:
             del rois[roiname]
     mask = intersect_masks(rois.values(), threshold=0, connected=False)
     run_mds_on_betas(
-        sub, bidsroot, mask=mask,
-        target_cats=[cat1, cat2], target_colors=[col1, col2]
+        sub, bidsroot, mask=mask, target_cats=[cat1, cat2], target_colors=[col1, col2]
     )

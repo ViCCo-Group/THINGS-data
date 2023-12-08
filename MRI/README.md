@@ -1,13 +1,30 @@
 # THINGS-fMRI
 
-Code accompanying the fMRI analyses demonstrated in the [THINGS-data manuscript](https://doi.org/10.1101/2022.07.22.501123).
+This repository contains code for running the analyses presented in the [THINGS-data manuscript](https://doi.org/10.1101/2022.07.22.501123).
 
-## notebooks
+## Installation
+
+The python code can be installed from this repository with `pip`:
+
+```
+# create a new environment
+conda create -n thingsdata python==3.9
+conda activate thingsdata
+# install the python modules for analyzing the fMRI data
+pip install -e .
+```
+
+## External requirements
+
+Some of the analyses run non-python neuroimaging software, such as [FreeSurfer](https://surfer.nmr.mgh.harvard.edu/), [ANTS](https://stnava.github.io/ANTs/), and [FSL](https://fsl.fmrib.ox.ac.uk/). 
+
+
+## Jupyter notebooks
 
 -  [fmri_usage.ipynb](notebooks/fmri_usage.ipynb): Examples on how to interact with the fMRI data in general, such as: a) loading the single trial responses from the table or the volumetric data, b) using the brain masks to convert data between these two formats, c) plotting data on the cortical flat maps.
 -  [animacy_size.ipynb](notebooks/animacy_size.ipynb): Demonstration for fitting an encoding model of object animacy and size to the single trial fMRI responses.
 
-## src
+## Python modules
 
 - [reconall.py](src/reconall.py): Python scrpit wrapping [FreeSurfer reconall](https://surfer.nmr.mgh.harvard.edu/fswiki/recon-all). 
 - [scenePRF_Fix.py](src/scenePRF_Fix.py): Experiment code to run used to run the PRF experiment in psychopy.
@@ -19,7 +36,7 @@ Code accompanying the fMRI analyses demonstrated in the [THINGS-data manuscript]
 - [mds_betas.py](src/mds_betas.py): Script for visualizing similarity structure in LOC responses via multidimensional scaling (grouped by object categories). 
 - [utils.py](src/utils.py), [glm.py](src/glm.py), [dataset](src/dataset.py): Miscellaneous helper functions used by the other modules.
 
-## scripts
+## Bash scripts
 
 - [neurodocker.sh](scripts/neurodocker.sh): Recipe for a docker container running FSL and FreeSurfer.  
 - [reconall.sh](scripts/reconall.sh): Run FreeSurfer recon-all through the neurodocker container. 
