@@ -12,6 +12,7 @@ python betas.py 01 /home/user/thingsmri
 import glob
 import os
 import random
+import sys
 import time
 from itertools import combinations
 from os.path import join as pjoin
@@ -42,9 +43,6 @@ from thingsmri.utils import (
     regress_out,
     r2_ndarr,
 )
-
-import warnings
-warnings.filterwarnings('ignore')
 
 
 class SingleTrialBetas(THINGSGLM):
@@ -1075,9 +1073,9 @@ def match_nnslope(reg, unreg):
 
 
 def load_betas(
+    bidsroot: str,
     sub: str,
     mask: str,
-    bidsroot: str,
     betas_derivname: str = "betas_loo/on_residuals/scalematched",
     smoothing=0.0,
     dtype=np.single,
@@ -1099,8 +1097,9 @@ def load_betas(
     with Parallel(n_jobs=-1) as parallel:
         betas_l = parallel(
             delayed(apply_mask_smoothed)(bf, mask, smoothing, dtype)
-            for bf in (tqdm(betafiles, desc="loading betas"))
-        )
+            for bf in betafiles
+            )
+        
     betas = np.vstack(betas_l)
     return betas  # shape (ntrials, nvoxel)
 
@@ -1236,7 +1235,6 @@ def posthoc_scaling(
 
 
 if __name__ == "__main__":
-    import sys
 
     sub, bidsroot = sys.argv[1], sys.argv[2]
     # get an unregularized estimate of responses

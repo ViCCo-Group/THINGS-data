@@ -14,4 +14,6 @@ h5py==3.10.0
 pycortex==1.2.7
 cmasher==1.6.3
 duecredit==0.9.1
+numexpr==2.7.3
+tables==3.7.0
 jupyter

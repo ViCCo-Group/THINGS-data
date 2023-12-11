@@ -3,13 +3,15 @@
 import warnings
 from os.path import exists as pexists
 from os.path import join as pjoin
+from os.path import pardir
+import pandas as pd
 
 from bids import BIDSLayout
 
 
 class ThingsMRIdataset:
     """
-    Data loader for the THINGS-fMRI dataset.
+    Data loader for the THINGS-fMRI BIDS timeseries dataset.
     """
 
     def __init__(self, root_path: str, validate: bool = True):
@@ -89,3 +91,43 @@ class ThingsMRIdataset:
             "anat",
             f"sub-{subject}_acq-prescannormalized_rec-pydeface_desc-preproc_T1w.nii.gz",
         )
+
+
+class ThingsmriLoader:
+    def __init__(self, thingsmri_dir):
+        self.thingsmri_dir = thingsmri_dir
+        self.betas_dir = pjoin(thingsmri_dir, "betas_csv")
+        self.brainmasks_dir = pjoin(thingsmri_dir, "brainmasks")
+
+    def load_responses(self, subject):
+        stimdata = pd.read_csv(
+            pjoin(self.betas_dir, f"sub-{subject}_StimulusMetadata.csv")
+        )
+        voxdata = pd.read_csv(pjoin(self.betas_dir, f"sub-{subject}_VoxelMetadata.csv"))
+        responses = pd.read_hdf(pjoin(self.betas_dir, f"sub-{subject}_ResponseData.h5"))
+        return responses, stimdata, voxdata
+
+    def get_brainmask(self, subject):
+        return pjoin(self.brainmasks_dir, f"sub-{subject}_space-T1w_brainmask.nii.gz")
+
+
+def load_animacy_size(
+    ani_csv: str = pjoin(pardir, "data", "animacy.csv"),
+    size_tsv: str = pjoin(pardir, "data", "size_fixed.csv"),
+):
+    # load with pandas
+    ani_df = pd.read_csv(ani_csv)[["uniqueID", "lives_mean"]]
+    ani_df = ani_df.rename(columns={"lives_mean": "animacy"})
+    size_df = pd.read_csv(size_tsv, sep=";")[["uniqueID", "meanSize"]]
+    size_df = size_df.rename(columns={"meanSize": "size"})
+    # ani_df has "_", size_df " " as separator in multi-word concepts
+    size_df["uniqueID"] = size_df.uniqueID.str.replace(" ", "_")
+    # merge
+    anisize_df = pd.merge(
+        left=ani_df,
+        right=size_df,
+        on="uniqueID",
+        how="outer",
+    )
+    assert anisize_df.shape[0] == ani_df.shape[0] == size_df.shape[0]
+    return anisize_df

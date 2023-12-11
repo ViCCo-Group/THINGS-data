@@ -3,4 +3,5 @@ __pycache__
 *.egg-info
 *.vscode/
 .*
+MRI/build
 !/.gitignore

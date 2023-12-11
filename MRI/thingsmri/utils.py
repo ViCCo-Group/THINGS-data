@@ -558,27 +558,6 @@ def match_scale(
     return matched
 
 
-def load_animacy_size(
-    ani_csv: str = pjoin(pardir, "data", "animacy.csv"),
-    size_tsv: str = pjoin(pardir, "data", "size_fixed.csv"),
-):
-    # load with pandas
-    ani_df = pd.read_csv(ani_csv)[["uniqueID", "lives_mean"]]
-    ani_df = ani_df.rename(columns={"lives_mean": "animacy"})
-    size_df = pd.read_csv(size_tsv, sep=";")[["uniqueID", "meanSize"]]
-    size_df = size_df.rename(columns={"meanSize": "size"})
-    # ani_df has "_", size_df " " as separator in multi-word concepts
-    size_df["uniqueID"] = size_df.uniqueID.str.replace(" ", "_")
-    # merge
-    anisize_df = pd.merge(
-        left=ani_df,
-        right=size_df,
-        on="uniqueID",
-        how="outer",
-    )
-    assert anisize_df.shape[0] == ani_df.shape[0] == size_df.shape[0]
-    return anisize_df
-
 
 def get_prf_rois(sub, bidsroot, prf_derivname) -> dict:
     """
