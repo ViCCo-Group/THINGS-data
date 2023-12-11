@@ -23,6 +23,7 @@ Some of the analyses run non-python neuroimaging software, such as [FreeSurfer](
 
 -  [fmri_usage.ipynb](notebooks/fmri_usage.ipynb): Examples on how to interact with the fMRI data in general, such as: a) loading the single trial responses from the table or the volumetric data, b) using the brain masks to convert data between these two formats, c) plotting data on the cortical flat maps.
 -  [animacy_size.ipynb](notebooks/animacy_size.ipynb): Demonstration for fitting an encoding model of object animacy and size to the single trial fMRI responses.
+-  [working_with_rois.ipynb](notebooks/working_with_rois.ipynb): Demonstration for how to extract data from regions of interest.
 
 ## Python modules
 

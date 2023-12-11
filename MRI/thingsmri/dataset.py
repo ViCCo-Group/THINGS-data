@@ -99,12 +99,14 @@ class ThingsmriLoader:
         self.betas_dir = pjoin(thingsmri_dir, "betas_csv")
         self.brainmasks_dir = pjoin(thingsmri_dir, "brainmasks")
 
-    def load_responses(self, subject):
+    def load_responses(self, subject, drop_voxel_id_from_responses=True):
         stimdata = pd.read_csv(
             pjoin(self.betas_dir, f"sub-{subject}_StimulusMetadata.csv")
         )
         voxdata = pd.read_csv(pjoin(self.betas_dir, f"sub-{subject}_VoxelMetadata.csv"))
         responses = pd.read_hdf(pjoin(self.betas_dir, f"sub-{subject}_ResponseData.h5"))
+        if drop_voxel_id_from_responses:
+            responses = responses.drop(columns="voxel_id")
         return responses, stimdata, voxdata
 
     def get_brainmask(self, subject):
