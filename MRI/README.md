@@ -16,8 +16,7 @@ pip install -e .
 
 ## External requirements
 
-Some of the analyses run non-python neuroimaging software, such as [FreeSurfer](https://surfer.nmr.mgh.harvard.edu/), [ANTS](https://stnava.github.io/ANTs/), and [FSL](https://fsl.fmrib.ox.ac.uk/). 
-
+Some of the analyses run non-python neuroimaging software, such as [FreeSurfer](https://surfer.nmr.mgh.harvard.edu/), [ANTS](https://stnava.github.io/ANTs/), and [FSL](https://fsl.fmrib.ox.ac.uk/).
 
 ## Jupyter notebooks
 

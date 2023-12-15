@@ -2,7 +2,7 @@
 
 [THINGS-data](https://elifesciences.org/articles/82580) is a collection of large-scale datasets for the study of natural object representations in brain and behavior. It includes functional magnetic resonance imaging (fMRI) data, magnetoencephalographic (MEG) recordings, and 4.70 million similarity judgments in response to thousands of images from the [THINGS object concept and image database](https://doi.org/10.1371/journal.pone.0223792).
 
-# Repository contents
+# Code Repositories
 
 This repository the scripts and notebooks for reproducing the neuroimaging analyses presented in the [THINGS-data paper](https://elifesciences.org/articles/82580). It is structured into two sub-folders reflecting the two neuroimaging data modalities: 
 - [MRI](MRI)
@@ -11,11 +11,11 @@ This repository the scripts and notebooks for reproducing the neuroimaging analy
 
 # Download
 
-## Download from figshare
+## figshare
 
 THINGS-data is hosted as a collection of data objects on figshare. 
 
-> 🔗 Figshare Download
+> 🔗 THINGS-data on FigShare
 > 
 > [https://doi.org/10.25452/figshare.plus.c.6161151](https://doi.org/10.25452/figshare.plus.c.6161151)
 
@@ -23,31 +23,34 @@ Besides the raw data, this collection includes a data derivatives such as prepro
 
 You can browse the collection and download individual parts which are relevant for your research.
 
-By default, clicking on the desired data object will prompt a browser download. If you plan to download larger data objects such as the raw MEG or fMRI datasets, it might make sense to start this process in the command line. Simply right-click on the “Download” button and copy the link address. Executing the following code in the command line to begin the download process for that file. 
-```
-wget https://figshare.com/copied/link/address
-```
-For longer downloads, it might make sense to run this process in the background with tools such as `screen` or `tmux`.
+For smaller files, you can simply click the `Download` button!
+![](assets/download_button.png)
 
-## Download from OpenNeuro
+If you plan to download larger data objects, it might make sense to start this process in the command line. Simply right-click on the `Download`` button and copy the link address. Executing the following code in the command line to begin the download process for that file. 
+```
+# This link downloads the fMRI single trial responses
+wget https://plus.figshare.com/ndownloader/files/36789690
+```
+Since downloading larger data object may take some time, it can make sense to run this process in the background with tools such as `screen` or `tmux`.
+
+
+## OpenNeuro
 
 The raw fMRI and MEG datasets are available on [OpenNeuro](https://openneuro.org). 
 
-> 🔗 OpenNeuro Download
+> 🔗 THINGS-data on OpenNeuro
 > 
 > - MRI: [https://openneuro.org/datasets/ds004192](https://openneuro.org/datasets/ds004192)
 > - MEG: [https://openneuro.org/datasets/ds004212](https://openneuro.org/datasets/ds004212)
 
-
-
 The official [documentation](https://docs.openneuro.org/user-guide) gives helpful explanations on how to download data from OpenNeuro.
 
 
-## Download from OSF
+## OSF
 
 The behavioral dataset containing 4.7 million human similarity judgements is available on OSF and can be downloaded directly via your web browser.
 
-> 🔗 OSF Download
+> 🔗 THINGS-data on OSF
 > 
 > [osf.io/f5rn6/](https://osf.io/f5rn6/)
 
