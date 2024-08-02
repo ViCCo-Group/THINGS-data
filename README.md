@@ -29,7 +29,7 @@ For smaller files, you can simply click the `Download` button!
 If you plan to download larger data objects, it might make sense to start this process in the command line. Simply right-click on the `Download`` button and copy the link address. Executing the following code in the command line to begin the download process for that file. 
 ```
 # This link downloads the fMRI single trial responses
-wget https://plus.figshare.com/ndownloader/files/36789690
+wget -O betas_csv.zip https://plus.figshare.com/ndownloader/files/36789690
 ```
 Since downloading larger data object may take some time, it can make sense to run this process in the background with tools such as `screen` or `tmux`.
 
