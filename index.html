@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>THINGS-data | Multimodal object representations</title>
+    <meta
+      name="description"
+      content="THINGS-data is a multimodal, large-scale collection of datasets for studying natural object representations in brain and behavior."
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <div class="logo">
+          <span class="logo-mark">THINGS</span>
+          <span class="logo-text">data</span>
+        </div>
+        <nav class="nav">
+          <a href="#overview">Overview</a>
+          <a href="#components">Data components</a>
+          <a href="#use-cases">Examples</a>
+          <a href="#code">Analysis code</a>
+          <a href="#citation">Citation</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero / Overview -->
+      <section id="overview" class="section hero">
+        <div class="container hero-inner">
+          <div class="hero-copy">
+            <h1>THINGS-data</h1>
+            <p class="hero-tagline">
+              A multimodal, large-scale collection for studying natural object
+              representations in human brain and behavior.
+            </p>
+            <p class="hero-text">
+              All data are sampled from responses to the same stimulus set: the
+              <a href="https://doi.org/10.1371/journal.pone.0223792" target="_blank" rel="noopener noreferrer"><strong>THINGS database</strong></a> of
+              <strong>1,854 object concepts</strong> and
+              <strong>26,107 natural images</strong>. THINGS-data links
+              <strong>fMRI</strong>, <strong>MEG</strong>, and
+              <strong>behavioral similarity judgments</strong> measured with these stimuli.
+            </p>
+            <div class="hero-actions">
+              <a href="#components" class="btn primary">Get the data</a>
+              <a
+                href="https://doi.org/10.7554/eLife.82580"
+                class="btn ghost"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Read the paper
+              </a>
+            </div>
+          </div>
+          <div class="hero-highlight">
+            <div class="stat-grid">
+              <div class="stat">
+                <div class="stat-value">1,854</div>
+                <div class="stat-label">Object concepts</div>
+              </div>
+              <div class="stat">
+                <div class="stat-value">26k+</div>
+                <div class="stat-label">Naturalistic object images</div>
+              </div>
+              <div class="stat">
+                <div class="stat-value">4.7M</div>
+                <div class="stat-label">Behavioral similarity judgments</div>
+              </div>
+              <div class="stat">
+                <div class="stat-value">fMRI · MEG</div>
+                <div class="stat-label">Neuroimaging responses resolved in space and time</div>
+              </div>
+            </div>
+            <p class="hero-note">
+              All data are openly available via Figshare, OpenNeuro, and OSF, with
+              ready-to-use derivatives and analysis code.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Data components -->
+      <section id="components" class="section">
+        <div class="container">
+          <h2>Data components</h2>
+          <p class="section-intro">
+            Every component uses the same THINGS stimulus set (object concepts and images).
+            Data are openly available: preprocessed fMRI and MEG derivatives via the
+            Figshare collection, raw fMRI and MEG in BIDS format on OpenNeuro, and
+            behavioral similarities and embeddings on OSF.
+          </p>
+
+          <div class="card-grid">
+            <article class="card">
+              <h3>Behavior</h3>
+              <p>
+                Triplet odd-one-out similarity judgments (~4.7M) over THINGS
+                images, plus an semantic embedding model capturing interpreable dimensions underlying perceived objects similarity.
+              </p>
+              <div class="card-links">
+                <a
+                  href="https://osf.io/f5rn6/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="card-link"
+                >
+                  Behavioral data on OSF
+                </a>
+              </div>
+            </article>
+
+            <article class="card">
+              <h3>fMRI</h3>
+              <p>
+                High-resolution functional magnetic resonance imaging (fMRI) with dense sampling per participant during
+                natural object viewing. Three participants, each saw > 8,000 images of 720 objects.
+              </p>
+              
+              <div class="card-links">
+                <a href="fmri-data.html" class="card-link">
+                  How to use
+                </a>
+                <a
+                  href="https://doi.org/10.25452/figshare.plus.20492835.v2"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="card-link"
+                >
+                  Preprocessed fMRI responses (Figshare)
+                </a>
+                <a
+                  href="https://openneuro.org/datasets/ds004192"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="card-link"
+                >
+                  Raw fMRI data (OpenNeuro)
+                </a>
+                <a
+                  href="https://doi.org/10.25452/figshare.plus.c.6161151"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="card-link"
+                >
+                  Browse all derivatives (Figshare collection)
+                </a>
+              </div>
+            </article>
+
+            <article class="card">
+              <h3>MEG</h3>
+              <p>
+                Time-resolved magnetoencephalographic (MEG) recordings during object viewing.
+              </p>
+              <ul class="card-list">
+                <li>Four participants, twelve sessions each</li>
+                <li>Preprocessed sensor-level time courses and eyetracking</li>
+              </ul>
+              <div class="card-links">
+                <a
+                  href="https://openneuro.org/datasets/ds004212"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="card-link"
+                >
+                  Raw MEG on OpenNeuro (ds004212)
+                </a>
+                <a
+                  href=https://doi.org/10.25452/figshare.plus.21215246"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="card-link"
+                >
+                  Preprocessed MEG data (Figshare)
+                </a>
+              </div>
+            </article>
+
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Examples -->
+      <section id="use-cases" class="section section-alt">
+        <div class="container">
+          <h2>How THINGS-data has been used</h2>
+          <p class="section-intro">
+            A few concrete example use cases from Teichmann, Contier, and
+            colleagues.
+          </p>
+          <div class="usecase-grid">
+            <article class="usecase">
+              <h3>1. Replicating seminal findings and integrating modalities across brain and behavior.</h3>
+              <p>
+                The main THINGS-data paper
+                (<a
+                  href="https://doi.org/10.7554/eLife.82580"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Hebart, Contier, Teichmann et al., 2023</a
+                >) shows how to (i) replicate classic findings on the representation of object
+                animacy and size in the human brain, (ii) link behavioral embedding to
+                cortical response, and (iii) integrate object responses resolved in time and space.
+
+              </p>
+            </article>
+            <article class="usecase">
+              <h3>2. Time-resolved object properties in MEG</h3>
+              <p>
+                Using THINGS MEG in
+                <a
+                  href="https://doi.org/10.1038/s41593-023-01398-6"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >“Dynamic representation of multidimensional object properties
+                  in the human brain”</a
+                >
+                to model the temporal dynamics of neural signals reflecting human perception of objects.
+              </p>
+            </article>
+            <article class="usecase">
+              <h3>3. Behavior-derived object dimensions in visual cortex</h3>
+              <p>
+                Using the behavioral and fMRI parts of THINGS-data, this paper
+                <a
+                  href="https://doi.org/10.1016/j.neuroimage.2023.120150"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >“Distributed representations of behavior-derived object
+                  dimensions in the human visual system”</a
+                >
+                mapped interpretable behavioral dimensions onto cortical
+                response patterns, revealing human understanding of objects is distributed across the visual system.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Analysis code -->
+      <section id="code" class="section section-alt">
+        <div class="container">
+          <h2>Analysis code in this repository</h2>
+          <p class="section-intro">
+            This GitHub repository contains the analysis code used for the
+            neuroimaging results in the THINGS-data paper. It focuses on fMRI
+            and MEG; raw data live on OpenNeuro, and derivatives on Figshare.
+          </p>
+          <div class="code-grid">
+            <div class="code-block">
+              <h3>MRI</h3>
+              <p>
+                The <a href="MRI/README.md"><code>MRI/</code></a> folder contains Python modules, scripts,
+                and notebooks for working with THINGS-fMRI:
+              </p>
+              <ul>
+                <li>
+                  <a href="MRI/thingsmri/dataset.py"><code>ThingsMRIdataset</code></a> and related utilities to
+                  navigate BIDS-formatted data.
+                </li>
+                <li>
+                  <a href="MRI/thingsmri/dataset.py"><code>ThingsmriLoader</code></a> for loading single-trial betas,
+                  voxel metadata, and masks.
+                </li>
+                <li>
+                  GLM and encoding model workflows (e.g. <a href="MRI/thingsmri/glm.py"><code>glm.py</code></a>, <a href="MRI/notebooks/animacy_size.ipynb"><code>animacy_size.ipynb</code></a>).
+                </li>
+              </ul>
+              <p>
+                See <a href="MRI/README.md"><code>MRI/README.md</code></a> and example notebooks in
+                <a href="MRI/notebooks/"><code>MRI/notebooks/</code></a> for usage.
+              </p>
+            </div>
+            <div class="code-block">
+              <h3>MEG &amp; eyetracking</h3>
+              <p>
+                The <a href="MEG/README_MEG.txt"><code>MEG/</code></a> folder provides a stepwise pipeline for
+                preprocessing, quality control, validation analyses, and
+                decoding/RSA using MEG and eyetracking data.
+              </p>
+              <ul>
+                <li>Preprocessing of BIDS MEG data and head position checks</li>
+                <li>
+                  Validation analyses for animacy/size, MEG–fMRI combination,
+                  and noise ceilings
+                </li>
+                <li>
+                  Pairwise decoding and representational similarity workflows
+                </li>
+              </ul>
+              <p>
+                See <a href="MEG/README_MEG.txt"><code>MEG/README_MEG.txt</code></a> for a description of the
+                pipeline and dependencies.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Citation -->
+      <section id="citation" class="section">
+        <div class="container">
+          <h2>How to cite THINGS-data</h2>
+          <p class="section-intro">
+            If you use THINGS-data in your work, please cite the main paper:
+          </p>
+          <div class="citation-block">
+            <p>
+              Hebart MN, Contier O, Teichmann L, Rockter AH, Zheng CY, Kidder A,
+              Corriveau A, Vaziri-Pashkam M, Baker CI (2023).
+              <em
+                >THINGS-data, a multimodal collection of large-scale datasets
+                for investigating object representations in human brain and
+                behavior.</em
+              >
+              eLife 12:e82580.
+              <a
+                href="https://doi.org/10.7554/eLife.82580"
+                target="_blank"
+                rel="noopener noreferrer"
+                >https://doi.org/10.7554/eLife.82580</a
+              >.
+            </p>
+            <details>
+              <summary>Show BibTeX</summary>
+              <pre>
+@article{THINGSdata,
+  title   = {THINGS-data, a multimodal collection of large-scale datasets for investigating object representations in human brain and behavior},
+  author  = {Hebart, Martin N and Contier, Oliver and Teichmann, Lina and Rockter, Adam H and Zheng, Charles Y and Kidder, Alexis and Corriveau, Anna and Vaziri-Pashkam, Maryam and Baker, Chris I},
+  journal = {eLife},
+  volume  = {12},
+  pages   = {e82580},
+  year    = {2023},
+  doi     = {10.7554/eLife.82580},
+  url     = {https://doi.org/10.7554/eLife.82580}
+}
+              </pre>
+            </details>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>
+          THINGS-data &middot; See the
+          <a href="https://doi.org/10.7554/eLife.82580" target="_blank" rel="noopener noreferrer"
+            >eLife paper</a
+          >
+          and the
+          <a
+            href="https://github.com/ThingsData/THINGS-data"
+            target="_blank"
+            rel="noopener noreferrer"
+            >GitHub repository</a
+          >.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
+

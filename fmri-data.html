@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>fMRI data guide | THINGS-data</title>
+    <meta
+      name="description"
+      content="What fMRI data is available for THINGS-data, where to download it, and how to use it."
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <div class="logo">
+          <a href="index.html" class="logo-link">
+            <span class="logo-mark">THINGS</span>
+            <span class="logo-text">data</span>
+          </a>
+        </div>
+        <nav class="nav">
+          <a href="index.html">Home</a>
+          <a href="index.html#components">Data components</a>
+          <a href="index.html#code">Analysis code</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="section hero">
+        <div class="container">
+          <h1>How to use the fMRI data</h1>
+          <p class="section-intro">
+            What is available, where to download it, and how to use it with the
+            analysis code in this repository.
+          </p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <h2>What’s in the Figshare collection (fMRI)</h2>
+          <p>
+            The <a href="https://doi.org/10.25452/figshare.plus.c.6161151" target="_blank" rel="noopener noreferrer">THINGS-data Figshare collection</a> groups all modalities. For fMRI, the main items are:
+          </p>
+          <ul class="card-list">
+            <li><strong>Single-trial response estimates</strong> — ResponseData.h5, StimulusMetadata.csv, VoxelMetadata.csv per subject (trials × voxels, trial/image info, ROI labels, noise ceilings, pRF parameters).</li>
+            <li><strong>Brain masks</strong> — Subject masks in T1w space for mapping results back to volumetric space.</li>
+            <li>Preprocessed BOLD, cortical surface maps, and other pipeline outputs (for re-running GLMs or advanced analyses).</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section section-alt">
+        <div class="container">
+          <h2>Which download for which goal</h2>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Goal</th>
+                <th>Download</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Encoding models, ROI analysis, single-trial analyses</td>
+                <td><a href="https://doi.org/10.25452/figshare.plus.20492835.v2" target="_blank" rel="noopener noreferrer">Single-trial response estimates</a> (required). Optionally <a href="https://doi.org/10.25452/figshare.plus.20492757.v1" target="_blank" rel="noopener noreferrer">brain masks</a> for 3D/volumetric plots.</td>
+              </tr>
+              <tr>
+                <td>Volumetric maps, plotting on the brain</td>
+                <td>Single-trial estimates + <a href="https://doi.org/10.25452/figshare.plus.20492757.v1" target="_blank" rel="noopener noreferrer">brain masks</a>.</td>
+              </tr>
+              <tr>
+                <td>Re-run GLM or full preprocessing pipeline</td>
+                <td><a href="https://openneuro.org/datasets/ds004192" target="_blank" rel="noopener noreferrer">Raw fMRI (OpenNeuro ds004192)</a>. Preprocessed BOLD and other derivatives from the <a href="https://doi.org/10.25452/figshare.plus.c.6161151" target="_blank" rel="noopener noreferrer">Figshare collection</a> as needed.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <h2>Directory layout for <code>ThingsmriLoader</code></h2>
+          <p>
+            For encoding, ROIs, and single-trial analyses, put the downloaded
+            files under one root directory with this structure:
+          </p>
+          <pre class="layout-block"><code>your_derivatives_root/
+├── betas_csv/
+│   ├── sub-01_ResponseData.h5
+│   ├── sub-01_StimulusMetadata.csv
+│   ├── sub-01_VoxelMetadata.csv
+│   ├── sub-02_ResponseData.h5
+│   └── ...
+└── brainmasks/          (optional)
+    ├── sub-01_space-T1w_brainmask.nii.gz
+    ├── sub-02_space-T1w_brainmask.nii.gz
+    └── ...</code></pre>
+          <p>
+            Unzip the single-trial package so that <code>betas_csv/</code> contains the per-subject files. If you download brain masks, place them in <code>brainmasks/</code>. Then in Python:
+          </p>
+          <pre class="layout-block"><code>from thingsmri.dataset import ThingsmriLoader
+
+loader = ThingsmriLoader(thingsmri_dir="path/to/your_derivatives_root")
+responses, stimdata, voxdata = loader.load_responses("01")
+# Optional: loader.get_brainmask("01") for volumetric plotting</code></pre>
+        </div>
+      </section>
+
+      <section class="section section-alt">
+        <div class="container">
+          <h2>Analysis code and examples</h2>
+          <p>
+            See <a href="https://github.com/ThingsData/THINGS-data/blob/main/MRI/README.md">MRI/README.md</a> for installation and module overview. Example notebooks in <code>MRI/notebooks/</code>:
+          </p>
+          <ul class="card-list">
+            <li><strong><a href="https://github.com/ThingsData/THINGS-data/blob/main/MRI/notebooks/fmri_usage.ipynb">fmri_usage.ipynb</a></strong> — Loading single-trial data, table vs volumetric format, brain masks, flat maps.</li>
+            <li><strong><a href="https://github.com/ThingsData/THINGS-data/blob/main/MRI/notebooks/animacy_size.ipynb">animacy_size.ipynb</a></strong> — Encoding model for object animacy and size.</li>
+            <li><strong><a href="https://github.com/ThingsData/THINGS-data/blob/main/MRI/notebooks/working_with_rois.ipynb">working_with_rois.ipynb</a></strong> — Extracting and analyzing ROIs (VoxelMetadata, functional and retinotopic ROIs).</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>
+          <a href="index.html">THINGS-data</a> &middot; See the
+          <a href="https://doi.org/10.7554/eLife.82580" target="_blank" rel="noopener noreferrer">eLife paper</a>
+          and the
+          <a href="https://github.com/ThingsData/THINGS-data" target="_blank" rel="noopener noreferrer">GitHub repository</a>.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
